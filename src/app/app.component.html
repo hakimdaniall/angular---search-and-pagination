@@ -13,11 +13,13 @@
         autocomplete="off" 
         />
       </div>
+      <button type="button" (click)="toggleTop10($event)">Top 10 University</button>
     </div>
    </div>
   </div>
 
-  <div class="table__layout">
+
+  <div class="table__layout" *ngIf="searchText === ''">
     <table *ngIf="list">
       <thead>
         <tr class="table100-head">
@@ -27,16 +29,46 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of pageOfItems | filter: searchText">
-          <td>{{data.country}}</td>
-          <td>{{data.name}}</td>
-          <td>{{data.web_pages}}</td>
-        </tr>
+        <ng-container *ngIf="!showTop10">
+          <tr *ngFor="let data of pageOfItems | filter: searchText">
+            <td>{{data.country}}</td>
+            <td>{{data.name}}</td>
+            <td>{{data.web_pages}}</td>
+          </tr>
+        </ng-container>
+        <ng-container *ngIf="showTop10">
+          <tr *ngFor="let data of topTenUni | filter: searchText">
+            <td>{{data.country}}</td>
+            <td>{{data.name}}</td>
+            <td>{{data.web_pages}}</td>
+          </tr>
+        </ng-container>
       </tbody>
     </table>
   </div>
-  <div class="card-footer pb-0 pt-3">
-      <jw-pagination [pageSize]="20"  [items]="list" (changePage)="onChangePage($event)"></jw-pagination>
+
+  <div class="table__layout" *ngIf="searchText !== ''">
+    <table *ngIf="list">
+      <thead>
+        <tr class="table100-head">
+          <th>Country</th>
+          <th>Name</th>
+          <th>Web</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container>
+          <tr *ngFor="let data of list | filter: searchText">
+            <td>{{data.country}}</td>
+            <td>{{data.name}}</td>
+            <td>{{data.web_pages}}</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer pb-0 pt-3" *ngIf="searchText === '' && !showTop10">
+      <jw-pagination [pageSize]="15"  [items]="list" (changePage)="onChangePage($event)"></jw-pagination>
   </div>
 </div>
 

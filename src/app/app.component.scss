@@ -42,6 +42,10 @@ td {
   padding: 10px;
 }
 
+.t-a-center-- {
+  text-align: center;
+}
+
 tbody tr:nth-child(even) {
   background-color: #e3edf7;
 }
@@ -63,6 +67,10 @@ tbody tr:nth-child(even) {
   width: fit-content;
   color: #3c4b66;
   list-style: none;
+
+  li.active {
+    color: #fff;
+  }
 
   a { 
     position: relative;
@@ -177,4 +185,17 @@ input {
   &:after {
     box-shadow: var(--top-shadow);
   }
+}
+
+button {
+  max-width: 170px;
+  width: 100%;
+  border-radius: 10px;
+  margin-right: 12px;
+  box-shadow: -2px -2px 6px rgb(255 255 255 / 60%), 2px 2px 12px #c8d8e7;
+  background: transparent;
+  border: none;
+  margin-left: 12px;
+  font-family: inherit;
+  cursor: pointer;
 }
